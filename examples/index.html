@@ -6,7 +6,16 @@
      <div id="chart" style="width: 400px; height: 400px;"></div>
      <script src="../dist/main.js"></script>
      <script>
-       const c = chart('#chart');
+       const c = chart({
+         query: '#chart',
+         charts: {
+           xdomain: [0, 300],
+           ydomain: [300, 0],
+           width: 300,
+           height: 300,
+           data: [[0,0], [20,80], [50,50], [100, 100], [200, 300], [300, 200]]
+         }
+        });
      </script>
    </body>
 </html>
