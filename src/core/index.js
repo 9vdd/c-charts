@@ -82,7 +82,7 @@ class Chart {
 }
 
 function chart(config) {
-  if (typeof config.query === 'string' && config.query.length > 0) {
+  if (typeof config === 'object' && typeof config.query === 'string' && config.query.length > 0) {
     const c = new Chart(config);
     return c;
   } else {
