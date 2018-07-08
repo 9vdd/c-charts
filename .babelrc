@@ -1,5 +1,11 @@
 {
   "presets": [
-      "env"
+    "stage-0",
+    ["env", {
+      "targets": {
+        "chrome": 52,
+        "browsers": ["last 2 versions","safari 7"]
+      }
+    }]
   ]
 }

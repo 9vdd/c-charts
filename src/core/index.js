@@ -1,6 +1,6 @@
 import {
   select
-} from "d3-selection";
+} from 'd3-selection';
 import {
   scaleLinear
 } from 'd3-scale';
@@ -11,6 +11,8 @@ import {
 import {
   line
 } from 'd3-shape';
+
+import ChartItem from './ChartItem';
 
 // import defaultConfig from './defaultConfig';
 
@@ -37,47 +39,12 @@ class Chart {
     }
   }
   initChart(chartConfig) {
-    const x = scaleLinear()
-      .range([50, chartConfig.width + 50])
-      .domain(chartConfig.xdomain);
-
-    const xAxis = axisBottom()
-      .scale(x)
-
-    this.svg.append('g')
-      .attr('class', 'x axis')
-      .attr('transform', `translate(0,${chartConfig.height + 10})`)
-      .call(xAxis);
-
-    const y = scaleLinear()
-      .range([10, chartConfig.height + 10])
-      .domain(chartConfig.ydomain);
-
-    const yAxis = axisLeft()
-      .scale(y)
-
-    this.svg.append('g')
-      .attr('class', 'y axis')
-      .attr('transform', 'translate(50,0)')
-      .call(yAxis);
-
-    const lineHandler = line()
-      .defined(d => d)
-      .x(d => x(d[0]))
-      .y(d => y(d[1]))
-
-    this.svg.append('path')
-      .attr('class', 'line')
-      .attr('d', () => lineHandler(chartConfig.data))
-      .style('stroke', 'red')
-      .style('fill', 'none');
-    
-    return {
-      x,
-      y,
-      xAxis,
-      yAxis
-    };
+    const chartDom = this.svg.append('g').attr('class', 'chart');
+    const chartItem = new ChartItem({
+      ...chartConfig,
+      chartDom
+    });
+    return chartItem;
   }
 }
 
