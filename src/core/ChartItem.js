@@ -9,8 +9,8 @@ import {
   axisLeft
 } from 'd3-axis';
 import {
-  line
-} from 'd3-shape';
+  lineSeries
+} from './series';
 
 class ChartItem {
   constructor(chartConfig) {
@@ -42,38 +42,37 @@ class ChartItem {
     this.bindData(chartConfig.data);
   }
 
-  dataHandler(data) {
-    const lineHandler = line()
-      .defined(d => d)
-      .x(d => this.x(d[0]))
-      .y(d => this.y(d[1]))
+  // dataHandler(data) {
+  //   const lineHandler = line()
+  //     .defined(d => d)
+  //     .x(d => this.x(d[0]))
+  //     .y(d => this.y(d[1]))
 
-    const pathData = lineHandler(data);
-    return pathData;
-  }
+  //   const pathData = lineHandler(data);
+  //   return pathData;
+  // }
   bindData(data) {
-    const dom = this.chartDom.append('path')
-      .attr('class', 'line');
-    const pathData = this.dataHandler(data);
+    // const dom = this.chartDom.append('path')
+    //   .attr('class', 'line');
+    // const pathData = this.dataHandler(data);
 
-    dom.attr('d', pathData)
-      .style('stroke', 'red')
-      .style('fill', 'none');
-    
+    // dom.attr('d', pathData)
+    //   .style('stroke', 'red')
+    //   .style('fill', 'none');
+    const seriesItem = lineSeries(this.chartDom, data, this.x, this.y);
+
     if (typeof this.series === 'undefined') {
       this.series = [];
     }
 
-    this.series.push({
-      dom,
-      pathData
-    });
+    this.series.push(seriesItem);
   }
 
   update(data) {
-    const pathData = this.dataHandler(data);
-    this.series[0].pathData = pathData;
-    this.series[0].dom.attr('d', pathData);
+    // const pathData = this.dataHandler(data);
+    this.series[0].update(data);
+    // this.series[0].pathData = pathData;
+    // this.series[0].dom.attr('d', pathData);
   }
 }
 
