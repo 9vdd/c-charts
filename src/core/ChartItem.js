@@ -9,8 +9,8 @@ import {
   axisLeft
 } from 'd3-axis';
 import {
-  lineSeries
-} from './series';
+  lineHandler
+} from './shapes';
 
 class ChartItem {
   constructor(chartConfig) {
@@ -59,13 +59,13 @@ class ChartItem {
     // dom.attr('d', pathData)
     //   .style('stroke', 'red')
     //   .style('fill', 'none');
-    const seriesItem = lineSeries(this.chartDom, data, this.x, this.y);
+    const lineItem = lineHandler(this.chartDom, data, this.x, this.y);
 
     if (typeof this.series === 'undefined') {
       this.series = [];
     }
 
-    this.series.push(seriesItem);
+    this.series.push(lineItem);
   }
 
   update(data) {

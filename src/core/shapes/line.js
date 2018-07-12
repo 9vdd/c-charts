@@ -34,6 +34,6 @@ class LineSeries {
     this.seriesDom.attr('d', this.pathData);
   }
 }
-export function lineSeries(dom, data, x, y) {
+export function lineHandler(dom, data, x, y) {
   return new LineSeries(dom, data, x, y);
 }
