@@ -4,9 +4,9 @@
   </head>
    <body>
      <div id="chart" style="width: 400px; height: 400px;"></div>
-     <script src="../dist/main.js"></script>
-     <script src="./data.js"></script>
+     <script src="../examples/data.js"></script>
      <script>
+       window.onload = function () {
        const c = chart({
          dom: '#chart',
          data: stockData,
@@ -17,6 +17,8 @@
         //    data: [[0,0], [20,80], [50,50], [100, 100], [200, 300], [300, 200]]
         //  }
         });
+        console.log(c);
+      }
         // setInterval(() => {
         //   data = [[0,0], [20,80], [50,50], [100, 100], [200, 100], [300, 240]];
         //   data[4] = [200, Math.floor(300 * Math.random())]
