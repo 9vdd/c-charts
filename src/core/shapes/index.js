@@ -1,6 +1,6 @@
 // import line from './line';
 
-export * from './line';
+export * from './maLine';
 
 export * from './candle';
 

@@ -14,6 +14,7 @@ import {
 } from 'd3-axis';
 
 import drawCandleChart from './shapes/candle.js';
+import drawMaHandler from './shapes/maLine.js';
 
 // import ChartItem from './ChartItem';
 
@@ -70,7 +71,8 @@ class Chart {
     this.data = config.data;
     this.charts = config.charts;
     this.init();
-    this.initChart();
+    this.initMainChart();
+    this.initStrategyChart();
   }
   init() {
     // this.svgWidth = this.config.width || this.dom.style.width || this.dom.offsetWidth;
@@ -81,13 +83,13 @@ class Chart {
     this.svg.attr('width', this.svgWidth);
     this.svg.attr('height', this.svgHeight);
   }
-  initChart() {
-    const x = scaleLinear()
+  initMainChart() {
+    this.x = scaleLinear()
       .range([this.config.axisLeftWidth, this.svgWidth - this.config.margin])
       .domain([0, this.config.data.length - 1]);
 
     const xAxis = axisBottom()
-      .scale(x)
+      .scale(this.x)
 
     this.svg.append('g')
       .attr('class', 'x axis')
@@ -97,12 +99,12 @@ class Chart {
     const minY = min(this.config.data, d => d.low);
     const maxY = max(this.config.data, d => d.high);
     
-    const y = scaleLinear()
+    this.y = scaleLinear()
       .range([this.config.margin, this.svgHeight - this.config.axisBottomHeight])
       .domain([maxY, minY]);
 
     const yAxis = axisLeft()
-      .scale(y)
+      .scale(this.y)
 
     this.svg.append('g')
       .attr('class', 'y axis')
@@ -114,13 +116,19 @@ class Chart {
     .attr('d', 'M30,30 L200,200');
 
 
-    const candleDom = drawCandleChart(this.config.data, x, y);
+    const candleDom = drawCandleChart(this.config.data, this.x, this.y);
     // this.svg.append(candleDom);
     // window.test = candleDom;
     // console.log(candleDom);
     // this.svg.append()
     const g = this.svg.append('g');
     g.html(candleDom.html());
+  }
+  initStrategyChart() {
+    console.log(123, drawMaHandler);
+    const maDom = drawMaHandler(this.config.data, this.x, this.y, 5);
+    const g = this.svg.append('g');
+    g.html(maDom.html());
   }
 }
 

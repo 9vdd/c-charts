@@ -1,39 +1,29 @@
-
-
+import {
+  select
+} from 'd3-selection';
 import {
   line
 } from 'd3-shape';
 
-class LineSeries {
-  constructor(dom, data, x, y) {
-    this.parentDom = dom;
-    this.data = data;
-    this.x = x;
-    this.y = y;
-    this.init();
-  }
-  init() {
-    this.lineHandler = line()
-      .defined(d => d)
-      .x(d => this.x(d[0]))
-      .y(d => this.y(d[1]))
+function drawLineHandler(data, x, y) {
+  console.log(23, data);
+  const lineHandler = line()
+      .defined(d => d.ma)
+      .x((d, index) => x(index))
+      .y(d => y(d))
 
-    this.pathData = this.lineHandler(this.data);
+  const pathData = lineHandler(data);
 
-    this.seriesDom = this.parentDom.append('path')
-      .attr('class', 'line');
-    // const pathData = this.dataHandler(data);
+  console.log(pathData);
 
-    this.seriesDom.attr('d', this.pathData)
-      .style('stroke', 'red')
-      .style('fill', 'none');
-  }
-  update(data) {
-    this.data = data;
-    this.pathData = this.lineHandler(this.data);
-    this.seriesDom.attr('d', this.pathData);
-  }
+  const group = select(document.createElement('g'))
+    .attr('class', 'line');
+
+  group.append('path')
+    .attr('d', pathData)
+    .style('stroke', 'red');
+
+  return group;
 }
-export function lineHandler(dom, data, x, y) {
-  return new LineSeries(dom, data, x, y);
-}
+
+export default drawLineHandler;
