@@ -15,33 +15,17 @@ function drawCandleWick (data, x, y) {
   }).join(' ')
 }
 function drawCandleChart (data, x, y) {
-  // this.svg.select('path.up-rect')
-  //   .attr('d', () => {
-  //     const path = drawCandleRect(this.upData)
-  //     return path
-  //   })
-  // const group = document.createElement('g');
-  // const test = d3.select(group);
-  // this.svg.select('path.up-wick')
-  //   .attr('d', () => this.drawCandleWick(this.upData))
-  // this.svg.select('path.down-rect')
-  //   .attr('d', () => this.drawCandleRect(this.downData))
-  // this.svg.select('path.down-wick')
-  //   .attr('d', () => this.drawCandleWick(this.downData))
   const group = select(document.createElement('g'))
   .attr('class', 'chart');
 
   group.append('path')
   .attr('class', 'rect')
-  .attr('fill', 'none')
-  .attr('stroke', 'red')
-  // .style('fill', 'white')
-  // .style('stroke', 'red')
-  // .style('stroke-width', '2')
+  .attr('fill', '#65c497')
   .attr('d', drawCandleRect(data, x, y));
 
   group.append('path')
   .attr('class', 'wick')
+  .attr('stroke', '#65c497')
   .attr('d', drawCandleWick(data, x, y));
 
   return group;
