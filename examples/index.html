@@ -4,6 +4,7 @@
   </head>
    <body>
      <div id="chart" style="width: 400px; height: 400px;"></div>
+     <script src="../dist/main.js"></script>
      <script src="../examples/data.js"></script>
      <script>
        window.onload = function () {
@@ -11,11 +12,6 @@
          dom: '#chart',
          data: stockData,
          charts: [['candle', 'ma5', 'ma10', 'ma20'], ['volume']]
-        //  charts: {
-        //    xdomain: [0, 300],
-        //    ydomain: [300, 0],
-        //    data: [[0,0], [20,80], [50,50], [100, 100], [200, 300], [300, 200]]
-        //  }
         });
         console.log(c);
       }
