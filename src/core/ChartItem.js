@@ -42,23 +42,7 @@ class ChartItem {
     this.bindData(chartConfig.data);
   }
 
-  // dataHandler(data) {
-  //   const lineHandler = line()
-  //     .defined(d => d)
-  //     .x(d => this.x(d[0]))
-  //     .y(d => this.y(d[1]))
-
-  //   const pathData = lineHandler(data);
-  //   return pathData;
-  // }
   bindData(data) {
-    // const dom = this.chartDom.append('path')
-    //   .attr('class', 'line');
-    // const pathData = this.dataHandler(data);
-
-    // dom.attr('d', pathData)
-    //   .style('stroke', 'red')
-    //   .style('fill', 'none');
     const lineItem = lineHandler(this.chartDom, data, this.x, this.y);
 
     if (typeof this.series === 'undefined') {
@@ -69,10 +53,7 @@ class ChartItem {
   }
 
   update(data) {
-    // const pathData = this.dataHandler(data);
     this.series[0].update(data);
-    // this.series[0].pathData = pathData;
-    // this.series[0].dom.attr('d', pathData);
   }
 }
 

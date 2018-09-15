@@ -16,42 +16,6 @@ import {
 import drawCandleChart from './shapes/candle.js';
 import drawMaHandler from './shapes/maLine.js';
 
-// import ChartItem from './ChartItem';
-
-// import defaultConfig from './defaultConfig';
-
-// class Chart {
-//   constructor(config) {
-//     this.config = config;
-//     this.dom = document.querySelector(config.query);
-//     this.svgWidth = this.config.width || this.dom.style.width || this.dom.offsetWidth;
-//     this.svgHeight = this.config.height || this.dom.style.height || this.dom.offsetHeight;
-//     this.svg = select(this.dom).append('svg');
-//     this.svg.attr('width', this.svgWidth);
-//     this.svg.attr('height', this.svgHeight);
-//     if (this.config.charts instanceof Array) {
-//       if (typeof this.charts === 'undefined') {
-//         this.charts = [];
-//       }
-//       this.config.charts.forEach((item, index) => {
-//         if (typeof item === 'object') {
-//           this.charts.push[this.initChart(item)];
-//         }
-//       });
-//     } else if (typeof this.config.charts === 'object') {
-//       this.charts = this.initChart(this.config.charts);
-//     }
-//   }
-//   initChart(chartConfig) {
-//     const chartDom = this.svg.append('g').attr('class', 'chart');
-//     const chartItem = new ChartItem({
-//       ...chartConfig,
-//       chartDom
-//     });
-//     return chartItem;
-//   }
-// }
-
 class Chart {
   constructor(config) {
     const defaultConfig = {
@@ -75,8 +39,6 @@ class Chart {
     this.initStrategyChart();
   }
   init() {
-    // this.svgWidth = this.config.width || this.dom.style.width || this.dom.offsetWidth;
-    // this.svgHeight = this.config.height || this.dom.style.height || this.dom.offsetHeight;
     this.svgWidth = this.dom.offsetWidth;
     this.svgHeight = this.dom.offsetHeight;
     this.svg = select(this.dom).append('svg');
@@ -117,10 +79,6 @@ class Chart {
 
 
     const candleDom = drawCandleChart(this.config.data, this.x, this.y);
-    // this.svg.append(candleDom);
-    // window.test = candleDom;
-    // console.log(candleDom);
-    // this.svg.append()
     const g = this.svg.append('g');
     g.html(candleDom.html());
   }
