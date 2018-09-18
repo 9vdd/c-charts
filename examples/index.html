@@ -10,7 +10,7 @@
        window.onload = function () {
        const c = chart({
          dom: '#chart',
-         data: stockData,
+         data: stockData.slice(0, 50).map(item => ({ time: item[0], open: item[1], high: item[2], low: item[3], close: item[4]})),
          charts: [['candle', 'ma5', 'ma10', 'ma20'], ['volume']]
         });
         console.log(c);
